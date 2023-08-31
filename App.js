@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import {Button, FlatList, SectionList, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {ActivityIndicator, Button, FlatList, SectionList, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import {useEffect, useState} from "react";
 
 export default function App() {
@@ -61,7 +61,21 @@ export default function App() {
   // ];
 
 
-    const [show, setShow] = useState(true);
+    // const [show, setShow] = useState(true);
+
+    const [showLoader, setShowLoader]  = useState(false);
+
+    const displayLoader = () => {
+      setShowLoader(true);
+
+      setTimeout(() => {
+        setShowLoader(false);
+      }, 4000);
+    }
+
+    useEffect(() => {
+      displayLoader();
+    }, [])
 
   return (
     <View style={styles.container}>
@@ -86,10 +100,14 @@ export default function App() {
       {/*  <Button title={"Toggle Student"} color={"#ae0000"} onPress={() => setShow(!show)}></Button>*/}
       {/*  {show ? <Student /> : null}*/}
 
+      {/* Activity Loader  */}
 
-        <TouchableOpacity style={{width: "90%", justifyContent: "center", alignItems: "center", padding: 20, borderRadius: 50, backgroundColor: "#ae0000"}}>
-            <Text style={{color: "white", fontWeight: "bold"}}>Custom Button</Text>
-        </TouchableOpacity>
+      <ActivityIndicator size={"large"} color={"#ae0000"} animating={showLoader}></ActivityIndicator>
+
+
+        {!showLoader && <TouchableOpacity onPress={() => displayLoader()} style={{marginTop: 30 ,width: "90%", justifyContent: "center", alignItems: "center", padding: 20, borderRadius: 50, backgroundColor: "#ae0000"}}>
+            <Text style={{color: "white", fontWeight: "bold"}}>Show Indicator</Text>
+        </TouchableOpacity>}
 
       {/*  To create a radio we will use useState value to check specific value*/}
 
