@@ -17,10 +17,11 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import CreateMaterialTopTabNavigator from "@react-navigation/material-top-tabs/src/navigators/createMaterialTopTabNavigator";
+import Posts from "./src/components/Posts";
 
 const Stack = createNativeStackNavigator();
-// const Tabs = createBottomTabNavigator();
-const Tabs = CreateMaterialTopTabNavigator();
+const Tabs = createBottomTabNavigator();
+// const Tabs = CreateMaterialTopTabNavigator();
 
 const Home = (props) => {
   return (
@@ -28,7 +29,11 @@ const Home = (props) => {
       <Text style={{ fontWeight: "bold", fontSize: 40 }}>Home Page</Text>
       <Button
         title={"About Page"}
-        onPress={() => props.navigation.navigate("About")}
+        onPress={() => props.navigation.navigate("about")}
+      />
+      <Button
+        title={"Posts Page"}
+        onPress={() => props.navigation.navigate("posts")}
       />
     </View>
   );
@@ -40,7 +45,7 @@ const AboutPage = (props) => {
       <Text style={{ fontSize: 40 }}>About Student</Text>
       <Button
         title={"Students Page"}
-        onPress={() => props.navigation.navigate("Student")}
+        onPress={() => props.navigation.navigate("student")}
       />
     </View>
   );
@@ -49,22 +54,28 @@ const AboutPage = (props) => {
 export default function App() {
   return (
     <NavigationContainer>
-      {/*<Stack.Navigator>*/}
-      {/*    <Stack.Screen name="Home" component={Home} options={{*/}
-      {/*        headerTitle: () => <Button title={"Button"} />,*/}
-      {/*        headerRight: () => <Button title={"Right Button"} />*/}
-      {/*    }} />*/}
-      {/*    <Stack.Screen name={"About"} component={AboutPage} />*/}
-      {/*    <Stack.Screen name={"Student"} component={Student} options={{*/}
-      {/*        headerBackTitle: "Back"*/}
-      {/*    }} />*/}
-      {/*</Stack.Navigator>*/}
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={Home}
+        />
+        <Stack.Screen name={"About"} component={AboutPage} />
+        <Stack.Screen
+          name={"Student"}
+          component={Student}
+          options={{
+            headerBackTitle: "Back",
+          }}
+        />
+        <Stack.Screen name={"posts"} component={Posts} />
+      </Stack.Navigator>
 
-      <Tabs.Navigator>
+      {/* <Tabs.Navigator>
         <Tabs.Screen name={"Home"} component={Home} />
-        <Tabs.Screen name={"About"} component={AboutPage} />
-        <Tabs.Screen name={"Student"} component={Student} />
-      </Tabs.Navigator>
+        <Tabs.Screen name={"about"} component={AboutPage} />
+        <Tabs.Screen name={"student"} component={Student} />
+        <Tabs.Screen name={"posts"} component={Posts} />
+      </Tabs.Navigator> */}
     </NavigationContainer>
   );
 }
