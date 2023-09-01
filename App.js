@@ -54,6 +54,7 @@ const AboutPage = (props) => {
 export default function App() {
   return (
     <NavigationContainer>
+      <StatusBar style="auto" />
       <Stack.Navigator>
         <Stack.Screen
           name="Home"
@@ -67,7 +68,7 @@ export default function App() {
             headerBackTitle: "Back",
           }}
         />
-        <Stack.Screen name={"posts"} component={Posts} />
+        <Stack.Screen name={"posts"} options={{headerTitle: ""}} component={Posts} />
       </Stack.Navigator>
 
       {/* <Tabs.Navigator>
